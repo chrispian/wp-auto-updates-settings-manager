@@ -12,12 +12,12 @@ Upload to plugins folder and activate plugin. You can then confgure under the "S
 
 ### Screenshots
 
-![image](https://user-images.githubusercontent.com/2103510/47240541-3878a100-d3ae-11e8-94c7-1ca7ec7fdc27.png)
-![image](https://user-images.githubusercontent.com/2103510/47240542-3878a100-d3ae-11e8-99c9-c91e5f374f5b.png)
-![image](https://user-images.githubusercontent.com/2103510/47240543-3878a100-d3ae-11e8-85ce-fd5d79bf86e0.png)
-![image](https://user-images.githubusercontent.com/2103510/47240544-3878a100-d3ae-11e8-9eb8-26115e3efb7d.png)
-![image](https://user-images.githubusercontent.com/2103510/47240545-3878a100-d3ae-11e8-9dea-65298999f227.png)
-![image](https://user-images.githubusercontent.com/2103510/47240546-3878a100-d3ae-11e8-9153-9338ad54ce9a.png)
+![image](https://user-images.githubusercontent.com/2103510/47241604-f0f41400-d3b1-11e8-9e7c-715e412522e8.png)
+![image](https://user-images.githubusercontent.com/2103510/47241605-f0f41400-d3b1-11e8-8ab0-a2a55c5d6654.png)
+![image](https://user-images.githubusercontent.com/2103510/47241606-f0f41400-d3b1-11e8-878f-909cf65191b3.png)
+![image](https://user-images.githubusercontent.com/2103510/47241607-f0f41400-d3b1-11e8-87f9-69d5002eb34d.png)
+![image](https://user-images.githubusercontent.com/2103510/47241608-f0f41400-d3b1-11e8-82cd-0a627ebf4c6a.png)
+![image](https://user-images.githubusercontent.com/2103510/47241609-f0f41400-d3b1-11e8-8bd3-58f1c02fe6c7.png)
 
 ### To Do
 
