@@ -27,7 +27,7 @@ Upload to plugins folder and activate plugin. You can then confgure under the "S
 - Update for compatibility with Gutenberg
 - Check for proper permissions/settings that will allow Auto Updates to run. 
 
-## Authors
+### Authors
 
 * **Chrispian H. Burks** - *Initial work* - [Chrispian](https://github.com/chrispian)
 
