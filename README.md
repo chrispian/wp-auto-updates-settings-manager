@@ -19,6 +19,13 @@ Upload to plugins folder and activate plugin. You can then confgure under the "S
 ![image](https://user-images.githubusercontent.com/2103510/47240545-3878a100-d3ae-11e8-9dea-65298999f227.png)
 ![image](https://user-images.githubusercontent.com/2103510/47240546-3878a100-d3ae-11e8-9153-9338ad54ce9a.png)
 
+### To Do
+
+- Add nonce to tabs
+- Make sure this plugin meets all WP standards, including for translations, etc.
+- Make sure this works with Multi-Site, BuddyPress, WooCommerce, etc.
+- Update for compatibility with Gutenberg
+- Check for proper permissions/settings that will allow Auto Updates to run. 
 
 ## Authors
 
