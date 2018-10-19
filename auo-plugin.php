@@ -56,7 +56,7 @@ function check_wp_config() {
  * @param $item
  * @return bool
  */
-function auo_update_plugins( $item ) {
+function auo_update_plugins( $update, $item ) {
 
 	$excluded_plugins = get_option( 'auo_plugin_option' );
 	if ( in_array( $item->slug, $excluded_plugins, true ) ) {
@@ -72,7 +72,7 @@ function auo_update_plugins( $item ) {
  * @param $item
  * @return bool
  */
-function auo_update_themes( $item ) {
+function auo_update_themes( $update, $item ) {
 
 	$excluded_themes = get_option( 'auo_theme_option' );
 	if ( in_array( $item->slug, $excluded_themes, true ) ) {
@@ -88,7 +88,7 @@ function auo_update_themes( $item ) {
  * @param $item
  * @return bool
  */
-function auo_update_translations( $item ) {
+function auo_update_translations( $update, $item ) {
 
 	$excluded_translations = get_option( 'auo_translation_option' );
 	if ( in_array( $item->slug, $excluded_translations, true ) ) {
