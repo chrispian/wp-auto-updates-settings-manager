@@ -284,8 +284,6 @@ function auo_plugin_settings_page() {
 
 			</table>
 
-
-
 			<table class="form-table">
 
 				<tr valign="top">

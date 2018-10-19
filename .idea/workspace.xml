@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="96e67176-631e-4b7e-9988-f441df132b40" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/auo-plugin.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/chrispian.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auo-options.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auo-plugin.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auo-options.php" beforeDir="false" afterPath="$PROJECT_DIR$/auo-options.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,12 +30,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="1514" />
+          <entry key="php" value="1515" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="1514" />
+          <entry key="PHP" value="1515" />
         </counts>
       </usages-collector>
     </session>
@@ -54,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/auo-options.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
-              <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+            <state relative-caret-position="1406">
+              <caret line="321" lean-forward="true" selection-start-line="321" selection-end-line="321" />
               <folding>
                 <element signature="e#6#165#0#PHP" expanded="true" />
               </folding>
@@ -66,7 +57,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/auo-plugin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
+            <state relative-caret-position="1268">
               <caret line="94" column="34" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="34" />
               <folding>
                 <element signature="e#7#957#0#PHP" expanded="true" />
@@ -158,12 +149,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1539957499470</updated>
-      <workItem from="1539957500764" duration="7170000" />
+      <workItem from="1539957500764" duration="7338000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7170000" />
+    <option name="totallyTimeSpent" value="7338000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="591" y="39" width="1990" height="1669" extended-state="0" />
@@ -206,7 +197,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/auo-plugin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
+        <state relative-caret-position="1268">
           <caret line="94" column="34" selection-start-line="94" selection-start-column="5" selection-end-line="94" selection-end-column="34" />
           <folding>
             <element signature="e#7#957#0#PHP" expanded="true" />
@@ -216,8 +207,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/auo-options.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="287" lean-forward="true" selection-start-line="287" selection-end-line="287" />
+        <state relative-caret-position="1406">
+          <caret line="321" lean-forward="true" selection-start-line="321" selection-end-line="321" />
           <folding>
             <element signature="e#6#165#0#PHP" expanded="true" />
           </folding>
