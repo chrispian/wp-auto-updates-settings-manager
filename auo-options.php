@@ -87,12 +87,12 @@ function auo_plugin_settings_page() {
 		?>
 
 		<form method="post" action="options.php">
-			<?php settings_fields( 'auo-plugin-settings' ); ?>
-			<?php do_settings_sections( 'auo-plugin-settings' ); ?>
+		<?php settings_fields( 'auo-plugin-settings' ); ?>
+		<?php do_settings_sections( 'auo-plugin-settings' ); ?>
 
-			<?php
+		<?php
 			if ( 'info' === $active_tab ) {
-			?>
+		?>
 
 				<h3>Thanks for using WordPress Auto Update Settings</h3>
 
@@ -103,137 +103,130 @@ function auo_plugin_settings_page() {
 				<p>If you have suggestions or want to contribute to this plugin check out <a href=https://github.com/chrispian/wp-auto-update-options">our github repo</a> for this plugin. Pull requests welcome.</p>
 
 
-				<?php
+		<?php
 			}
-			?>
+		?>
+
+		<?php
+			if ( 'core_settings' === $active_tab ) {
+		?>
+
+			<h3>Enable Automatic Updates for WordPress Core Files:</h3>
 
 			<?php
-				if ( 'core_settings' === $active_tab ) {
+			$auo_core_status              = esc_attr( get_option( 'auo_core_status' ) );
+			$auo_core_status_selected_yes = '';
+			$auo_core_status_selected_no  = '';
+
+			if ( 'Yes' === $auo_core_status ) {
+				$auo_core_status_selected_yes = 'selected';
+			}
+			if ( 'No' === $auo_core_status ) {
+				$auo_core_status_selected_no = 'selected';
+			}
+
 			?>
 
+			<select name="auo_core_status">
+				<option value="Yes" <?php echo $auo_core_status_selected_yes; ?> />
+				Yes</option>
+				<option value="No" <?php echo $auo_core_status_selected_no; ?> />
+				No</option>
+			</select>
 
-					<h3>Enable Automatic Updates for WordPress Core Files:</h3>
+			<h3>WordPress Update Type:</h3>
+			<?php
+			$auo_core_option                = esc_attr( get_option( 'auo_core_option' ) );
+			$auo_core_option_selected_all   = '';
+			$auo_core_option_selected_major = '';
+			$auo_core_option_selected_minor = '';
 
-					<?php
-					$auo_core_status              = esc_attr( get_option( 'auo_core_status' ) );
-					$auo_core_status_selected_yes = '';
-					$auo_core_status_selected_no  = '';
+			if ( 'All' === $auo_core_option ) {
+				$auo_core_option_selected_all = 'selected';
+			}
+			if ( 'Major' === $auo_core_option ) {
+				$auo_core_option_selected_major = 'selected';
+			}
+			if ( 'Minor' === $auo_core_option ) {
+				$auo_core_option_selected_minor = 'selected';
+			}
 
-					if ( 'Yes' === $auo_core_status ) {
-						$auo_core_status_selected_yes = 'selected';
-					}
-					if ( 'No' === $auo_core_status ) {
-						$auo_core_status_selected_no = 'selected';
-					}
-
-					?>
-
-					<select name="auo_core_status">
-						<option value="Yes" <?php echo $auo_core_status_selected_yes; ?> />
-						Yes</option>
-						<option value="No" <?php echo $auo_core_status_selected_no; ?> />
-						No</option>
-					</select>
-
-					<h3>WordPress Update Type:</h3>
-					<?php
-					$auo_core_option                = esc_attr( get_option( 'auo_core_option' ) );
-					$auo_core_option_selected_all   = '';
-					$auo_core_option_selected_major = '';
-					$auo_core_option_selected_minor = '';
-
-					if ( 'All' === $auo_core_option ) {
-						$auo_core_option_selected_all = 'selected';
-					}
-					if ( 'Major' === $auo_core_option ) {
-						$auo_core_option_selected_major = 'selected';
-					}
-					if ( 'Minor' === $auo_core_option ) {
-						$auo_core_option_selected_minor = 'selected';
-					}
-
-					?>
+				?>
 
 
-					<div>
-						WordPress describes each update type as follows:
-						<ul>
-							<li><strong>Development Updates</strong> = Core development updates, known as
-								the "bleeding edge".</li>
-							<li>
-							<li><strong>Major</strong> = Major core release updates</li>
-							<li><strong>Minor</strong> = Minor core updates, such as maintenance and
-								security releases</li>
-						</ul>
-						<p>Auto Updates are safe and in most casues you should be using Minor or Major Updates.
-						Use Development Updates only if you know and understand the risks - remember, this
-							is bleeding edge code and may break your site.</p>
+			<div>
+				WordPress describes each update type as follows:
+				<ul>
+					<li><strong>Development Updates</strong> = Core development updates, known as the "bleeding edge".</li>
+					<li><strong>Major</strong> = Major core release updates</li>
+					<li><strong>Minor</strong> = Minor core updates, such as maintenance and security releases</li>
+				</ul>
+				<p>Auto Updates are safe and in most casues you should be using Minor or Major Updates. Use Development Updates only if you know and understand the risks - remember, this is bleeding edge code and may break your site.</p>
 
-					</div>
+			</div>
 
-					<select name="auo_core_option">
-						<option value="ALL" <?php echo $auo_core_option_selected_all; ?> />
-						ALL (Development, Major, and Major Updates)</option>
-						<option value="Major" <?php echo $auo_core_option_selected_major; ?> />
-						Major Updates (Includes Minor Updates, NO Development Updates)</option>
-						<option value="Minor" <?php echo $auo_core_option_selected_minor; ?> />
-						Minor Updates Only (No Development or Major Updates)</option>
-						</select>
+			<select name="auo_core_option">
+				<option value="ALL" <?php echo $auo_core_option_selected_all; ?> />ALL (Development, Major, and Major Updates)</option>
+				<option value="Major" <?php echo $auo_core_option_selected_major; ?> />Major Updates (Includes Minor Updates, NO Development Updates)</option>
+				<option value="Minor" <?php echo $auo_core_option_selected_minor; ?> />Minor Updates Only (No Development or Major Updates)</option>
+			</select>
 
 
-					<?php
+			<?php
 				}
 			?>
-
 
 			<?php
 				if ( 'plugin_settings' === $active_tab ) {
 			?>
 
-					<h3>Enable Automatic Updates for Plugins:</h3>
+				<h3>Enable Automatic Updates for Plugins:</h3>
 
-					<?php
-					$auo_plugin_status              = esc_attr( get_option( 'auo_plugin_status' ) );
-					$auo_plugin_status_selected_yes = '';
-					$auo_plugin_status_selected_no  = '';
+				<?php
 
-					if ( 'Yes' === $auo_plugin_status ) {
-						$auo_plugin_status_selected_yes = 'selected';
-					}
-					if ( 'No' === $auo_plugin_status ) {
-						$auo_plugin_status_selected_no = 'selected';
-					}
+				$auo_plugin_status              = esc_attr( get_option( 'auo_plugin_status' ) );
+				$auo_plugin_status_selected_yes = '';
+				$auo_plugin_status_selected_no  = '';
 
-					?>
-					<select name="auo_plugin_status">
-						<option value="Yes" <?php echo $auo_plugin_status_selected_yes; ?> />
-						Yes</option>
-						<option value="No" <?php echo $auo_plugin_status_selected_no; ?> />
-						No</option>
-					</select>
+				if ( 'Yes' === $auo_plugin_status ) {
+					$auo_plugin_status_selected_yes = 'selected';
+				}
+				if ( 'No' === $auo_plugin_status ) {
+					$auo_plugin_status_selected_no = 'selected';
+				}
 
-					<h3>Exclude Plugins:</h3>
-					<?php
-					$installed_plugins = get_plugins();
-					$excluded_plugins  = get_option( 'auo_plugin_option' );
+				?>
+				<select name="auo_plugin_status">
+					<option value="Yes" <?php echo $auo_plugin_status_selected_yes; ?> />
+					Yes</option>
+					<option value="No" <?php echo $auo_plugin_status_selected_no; ?> />
+					No</option>
+				</select>
 
-					foreach ( $installed_plugins as $key => $plugin ) {
-						if ( $excluded_plugins ) {
-							if ( in_array( $plugin['TextDomain'], $excluded_plugins, true ) ) {
-								$checkbox_checked = 'checked';
-							} else {
-								$checkbox_checked = '';
-							}
+				<h3>Exclude Plugins:</h3>
+				<?php
+				$installed_plugins = get_plugins();
+				$excluded_plugins  = get_option( 'auo_plugin_option' );
+
+				foreach ( $installed_plugins as $key => $plugin ) {
+					if ( $excluded_plugins ) {
+						if ( in_array( $plugin['TextDomain'], $excluded_plugins, true ) ) {
+							$checkbox_checked = 'checked';
+						} else {
+							$checkbox_checked = '';
 						}
-						echo '<input type="checkbox" name="auo_plugin_option[]" value="' . esc_attr( $plugin['TextDomain'] ) . '"' . esc_attr( $checkbox_checked ) . ' />' . esc_attr( $plugin['Name'] ) . "<br />\n";
 					}
+					echo '<input type="checkbox" name="auo_plugin_option[]" value="' . esc_attr( $plugin['TextDomain'] ) . '"' . esc_attr( $checkbox_checked ) . ' />' . esc_attr( $plugin['Name'] ) . "<br />\n";
+				}
 
-										?>
+				?>
 
 
 			<?php
 				}
+			?>
 
+			<?php
 			if ( 'theme_settings' === $active_tab ) {
 			?>
 
@@ -337,10 +330,13 @@ function auo_plugin_settings_page() {
 							?>
 
 
-				<?php
-			}
-					if ( 'email_settings' === $active_tab ) {
-				?>
+			<?php
+				}
+			?>
+
+			<?php
+				if ( 'email_settings' === $active_tab ) {
+			?>
 
 				<h3>Send Emails For Updates:</h3>
 
@@ -366,8 +362,8 @@ function auo_plugin_settings_page() {
 				</select>
 
 
-				<?php
-			}
+			<?php
+				}
 			?>
 
 
@@ -376,8 +372,6 @@ function auo_plugin_settings_page() {
 					submit_button();
 				}
 			?>
-
-
 
 		</form>
 		</div>
