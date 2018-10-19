@@ -3,7 +3,7 @@
  *
  * Options screens for AUO Plugin.
  *
- * @link              http://www.chrispian.com
+ * @link              https://github.com/chrispian/wp-auto-update-options
  * @since             1.0.0
  * @package           Auo_Plugin
  *

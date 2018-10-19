@@ -3,13 +3,13 @@
  *
  *  Plugin to manage WordPress Auto Update Settings
  *
- * @link              http://www.chrispian.com
+ * @link              https://github.com/chrispian/wp-auto-update-options
  * @since             1.0.0
  * @package           Auo_Plugin
  *
  * @wordpress-plugin
  * Plugin Name:       Auto Update Options
- * Plugin URI:        http://www.chrispian.com
+ * Plugin URI:        https://github.com/chrispian/wp-auto-update-options
  * Description:       Adds options for Auto Updating WordPress Core, Plugins, Themes & Translations.
  * Version:           1.0.0
  * Author:            Chrispian H. Burks
