@@ -12,7 +12,7 @@ Upload to plugins folder and activate plugin. You can then confgure under the "S
 
 ### Screenshots
 
-![image](https://user-images.githubusercontent.com/2103510/47241604-f0f41400-d3b1-11e8-9e7c-715e412522e8.png)
+![image](https://user-images.githubusercontent.com/2103510/47241899-e38b5980-d3b2-11e8-9804-0a894f49176e.png)
 ![image](https://user-images.githubusercontent.com/2103510/47241605-f0f41400-d3b1-11e8-8ab0-a2a55c5d6654.png)
 ![image](https://user-images.githubusercontent.com/2103510/47241606-f0f41400-d3b1-11e8-878f-909cf65191b3.png)
 ![image](https://user-images.githubusercontent.com/2103510/47241604-f0f41400-d3b1-11e8-9e7c-715e412522e8.png)
