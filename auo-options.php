@@ -71,6 +71,7 @@ function auo_plugin_settings_page() {
 	</h2>
 
 	<div class="wrap">
+		<div class="card">
 
 		<?php
 
@@ -379,5 +380,6 @@ function auo_plugin_settings_page() {
 
 
 		</form>
+		</div>
 	</div>
 <?php } ?>
