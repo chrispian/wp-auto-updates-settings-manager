@@ -82,6 +82,22 @@ function auo_update_themes( $item ) {
 	}
 }
 
+/**
+ * Set return to tell WP to auto update translations or not
+ *
+ * @param $item
+ * @return bool
+ */
+function auo_update_translations( $item ) {
+
+	$excluded_translations = get_option( 'auo_translation_option' );
+	if ( in_array( $item->slug, $excluded_translations, true ) ) {
+		return false; // Never update a theme in this array.
+	} else {
+		return true; // Otherwise, update it!
+	}
+}
+
 // Grab some vars we'll need to decide what to do.
 $wp_config_status         = check_wp_config();
 $auo_update_plugin_status = get_option( 'auo_plugin_status' );
@@ -89,6 +105,7 @@ $aou_update_theme_status  = get_option( 'auo_plugin_status' );
 $auo_core_status          = get_option( 'auo_core_status' );
 $auo_core_option          = get_option( 'auo_core_option' );
 $auo_translation_status   = get_option( 'auo_translation_status' );
+$auo_translation_option   = get_option( 'auo_translation_option' );
 $auo_email_status         = get_option( 'auo_email_status' );
 
 // Run only if wp-config is properly configured and auto update plugin option is true.
@@ -117,7 +134,7 @@ if ( 'FOUND' === $wp_config_status && true === $auo_core_status ) {
 
 // Run only if wp-config is properly configured and auto update translations option is true.
 if ( 'FOUND' === $wp_config_status && 'Yes' === $auo_translation_status ) {
-	add_filter( 'auto_update_translation', '__return_true' );
+	add_filter( 'auto_update_translation', 'auo_update_translations', 10, 2 ); // Auto Updates translations, excluding those in the array.
 }
 
 // Run only if wp-config is properly configured and send update emails option is true.

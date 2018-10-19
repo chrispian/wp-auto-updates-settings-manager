@@ -261,6 +261,7 @@ function auo_plugin_settings_page() {
 					<th scope="row">Enable Automatic Updates for Translations:</th>
 					<td>
 
+
 						<?php
 						$auo_translation_status              = esc_attr( get_option( 'auo_translation_status' ) );
 						$auo_translation_status_selected_yes = '';
@@ -279,6 +280,36 @@ function auo_plugin_settings_page() {
 							<option value="Yes" <?php echo $auo_translation_status_selected_yes; ?> />Yes</option>
 							<option value="No" <?php echo $auo_translation_status_selected_no; ?> />No</option>
 						</select>
+					</td>
+				</tr>
+
+				<tr valign="top">
+					<th scope="row">Exclude Translations:</th>
+					<td>
+
+						<?php
+
+						$translations = get_available_languages();
+
+						$excluded_translations = get_option( 'auo_translation_option' );
+						$checkbox_checked      = '';
+
+						if ( is_array( $translations ) ) {
+							foreach ( $translations as $key => $translation ) {
+								if ( $excluded_translations ) {
+									if ( in_array( $translation, $excluded_translations, true ) ) {
+										$checkbox_checked = 'checked';
+									} else {
+										$checkbox_checked = '';
+									}
+								}
+
+								echo '<input type="checkbox" name="auo_translation_option[]" value="' . esc_attr( $translation ) . '" ' . esc_attr( $checkbox_checked ) . ' />' . esc_attr( $translation ) . "<br />\n";
+							}
+						}
+						?>
+
+
 					</td>
 				</tr>
 
