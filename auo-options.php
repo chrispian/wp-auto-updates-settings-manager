@@ -42,6 +42,7 @@ function register_auo_plugin_settings() {
 
 	// Register Translation Settings.
 	register_setting( 'auo-plugin-settings', 'auo_translation_status', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_translation_option', 'string' );
 
 	// Register Email Settings.
 	register_setting( 'auo-plugin-settings', 'auo_email_status', 'string' );
