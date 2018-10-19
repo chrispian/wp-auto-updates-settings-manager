@@ -55,27 +55,23 @@ function auo_plugin_settings_page() {
 	?>
 
 	<h2>WordPress Auto Update Options</h2>
-	<?php settings_errors(); ?>
 
 	<?php
 		$active_tab = isset( $_GET[ 'tab' ] ) ? $_GET[ 'tab' ] : 'info';
 	?>
 
-
 	<h2 class="nav-tab-wrapper">
 		<a href="?page=auo-plugin%2Fauo-options&tab=info" class="nav-tab <?php echo $active_tab === 'info' ? 'nav-tab-active' : ''; ?>">Auto Update Information</a>
 		<a href="?page=auo-plugin%2Fauo-options&tab=core_settings" class="nav-tab <?php echo $active_tab === 'core_settings' ? 'nav-tab-active' : ''; ?>">Core Settings</a>
 		<a href="?page=auo-plugin%2Fauo-options&tab=plugin_settings" class="nav-tab <?php echo $active_tab === 'plugin_settings' ? 'nav-tab-active' : ''; ?>">Plugin Settings</a>
-		<a href="?page=auo-plugin%2Fauo-options&tab=theme_settings" class="nav-tab" <?php echo $active_tab === 'theme_settings' ? 'nav-tab-active' : ''; ?>>Theme Settings</a>
+		<a href="?page=auo-plugin%2Fauo-options&tab=theme_settings" class="nav-tab <?php echo $active_tab === 'theme_settings' ? 'nav-tab-active' : ''; ?>">Theme Settings</a>
 		<a href="?page=auo-plugin%2Fauo-options&tab=translation_settings" class="nav-tab <?php echo $active_tab === 'translation_settings' ? 'nav-tab-active' : ''; ?>">Translation Settings</a>
 		<a href="?page=auo-plugin%2Fauo-options&tab=email_settings" class="nav-tab <?php echo $active_tab === 'email_settings' ? 'nav-tab-active' : ''; ?>">Email Settings</a>
 	</h2>
 
-
 	<div class="wrap">
 
 		<?php
-
 
 		/*
 		* Not sure if this is needed. Will come back to this.
@@ -89,7 +85,8 @@ function auo_plugin_settings_page() {
 		?>
 
 		<form method="post" action="options.php">
-
+			<?php settings_fields( 'auo-plugin-settings' ); ?>
+			<?php do_settings_sections( 'auo-plugin-settings' ); ?>
 
 			<?php
 			if ( 'info' === $active_tab ) {
@@ -112,8 +109,6 @@ function auo_plugin_settings_page() {
 				if ( 'core_settings' === $active_tab ) {
 			?>
 
-					<?php settings_fields( 'auo-plugin-settings' ); ?>
-					<?php do_settings_sections( 'auo-plugin-settings' ); ?>
 
 					<h3>Enable Automatic Updates for WordPress Core Files:</h3>
 

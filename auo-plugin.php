@@ -24,8 +24,6 @@
  * - Make sure this plugin meets all WP standards, including for translations, etc.
  * - Make sure this works with Multi-Site, BuddyPress, WooCommerce, etc.
  * - Update for compatibility with Gutenberg
- * - Update UI to be tabs for each section with a welcome screen
- * - Update Translations to use exclude method like Plugins and Themes.
  */
 
 // If this file is called directly, abort.
