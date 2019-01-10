@@ -3,15 +3,15 @@
  *
  *  Plugin to manage WordPress Auto Update Settings
  *
- * @link              https://github.com/chrispian/wp-auto-update-options
+ * @link              http://www.chrispian.com
  * @since             1.0.0
  * @package           Auo_Plugin
  *
  * @wordpress-plugin
  * Plugin Name:       Auto Update Options
- * Plugin URI:        https://github.com/chrispian/wp-auto-update-options
+ * Plugin URI:        http://www.chrispian.com
  * Description:       Adds options for Auto Updating WordPress Core, Plugins, Themes & Translations.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Chrispian H. Burks
  * Author URI:        http://www.chrispian.com
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || die( 'Direct Access Not Permitted.' );
 
 require_once 'auo-options.php';
 
-define( 'PLUGIN_NAME_VERSION', '1.0.0' );
+define( 'PLUGIN_NAME_VERSION', '1.0.1' );
 
 /**
  * Checks to make sure FTP credentials are found - do we even need this check?
@@ -57,10 +57,12 @@ function check_wp_config() {
 function auo_update_plugins( $update, $item ) {
 
 	$excluded_plugins = get_option( 'auo_plugin_option' );
-	if ( in_array( $item->slug, $excluded_plugins, true ) ) {
-		return false; // Never update a plugin in this array.
-	} else {
-		return true; // Otherwise, update it!
+	if ( $excluded_plugins ) {
+		if ( in_array( $item->slug, $excluded_plugins, true ) ) {
+			return false; // Never update a plugin in this array.
+		} else {
+			return true; // Otherwise, update it!
+		}
 	}
 }
 
@@ -73,10 +75,12 @@ function auo_update_plugins( $update, $item ) {
 function auo_update_themes( $update, $item ) {
 
 	$excluded_themes = get_option( 'auo_theme_option' );
-	if ( in_array( $item->slug, $excluded_themes, true ) ) {
-		return false; // Never update a theme in this array.
-	} else {
-		return true; // Otherwise, update it!
+	if ( $excluded_themes ) {
+		if ( in_array( $item->slug, $excluded_themes, true ) ) {
+			return false; // Never update a theme in this array.
+		} else {
+			return true; // Otherwise, update it!
+		}
 	}
 }
 
@@ -89,19 +93,22 @@ function auo_update_themes( $update, $item ) {
 function auo_update_translations( $update, $item ) {
 
 	$excluded_translations = get_option( 'auo_translation_option' );
-	if ( in_array( $item->slug, $excluded_translations, true ) ) {
-		return false; // Never update a theme in this array.
-	} else {
-		return true; // Otherwise, update it!
+	if ( $excluded_translations ) {
+		if ( in_array( $item->slug, $excluded_translations, true ) ) {
+			return false; // Never update a theme in this array.
+		} else {
+			return true; // Otherwise, update it!
+		}
 	}
 }
 
 // Grab some vars we'll need to decide what to do.
-$wp_config_status         = check_wp_config();
+// $wp_config_status         = check_wp_config();
+$wp_config_status         = 'FOUND';
 $auo_update_plugin_status = get_option( 'auo_plugin_status' );
-$aou_update_theme_status  = get_option( 'auo_plugin_status' );
-$auo_core_status          = get_option( 'auo_core_status' );
-$auo_core_option          = get_option( 'auo_core_option' );
+$aou_update_theme_status  = get_option( 'auo_theme_status' );
+$auo_update_core_status   = get_option( 'auo_core_status' );
+$auo_update_core_option   = get_option( 'auo_core_option' );
 $auo_translation_status   = get_option( 'auo_translation_status' );
 $auo_translation_option   = get_option( 'auo_translation_option' );
 $auo_email_status         = get_option( 'auo_email_status' );
@@ -112,20 +119,20 @@ if ( 'FOUND' === $wp_config_status && 'Yes' === $auo_update_plugin_status ) {
 }
 
 // Run only if wp-config is properly configured and auto update theme option is true.
-if ( 'FOUND' === $wp_config_status && true === $aou_update_theme_status ) {
+if ( 'FOUND' === $wp_config_status && 'Yes' === $aou_update_theme_status ) {	
 	add_filter( 'auto_update_theme', 'auo_update_themes', 10, 2 ); // Auto Updates plugins, excluding those in the array.
 }
 
 // Run only if wp-config is properly configured and auto update core option is true.
-if ( 'FOUND' === $wp_config_status && true === $auo_core_status ) {
+if ( 'FOUND' === $wp_config_status && 'Yes' === $auo_update_core_status ) {
 
-	if ( 'ALL' === $auo_core_option ) {
+	if ( 'ALL' === $auo_update_core_option ) {
 		add_filter( 'allow_dev_auto_core_updates', '__return_true' ); // Enable development, major & minor updates.
 	}
-	if ( 'Major' === $auo_core_option ) {
-		add_filter( 'allow_minor_auto_core_updates', '__return_true' ); // Enable major & minor updates.
+	if ( 'Major' === $auo_update_core_option || 'ALL' === $auo_update_core_option ) {
+		add_filter( 'allow_major_auto_core_updates', '__return_true' ); // Enable major & minor updates.		
 	}
-	if ( 'Minor' === $auo_core_option ) {
+	if ( 'Minor' === $auo_update_core_option || 'ALL' === $auo_update_core_option ) {
 		add_filter( 'allow_minor_auto_core_updates', '__return_true' ); // Enable minor updates.
 	}
 }

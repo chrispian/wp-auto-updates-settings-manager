@@ -3,18 +3,141 @@
  *
  * Options screens for AUO Plugin.
  *
- * @link              https://github.com/chrispian/wp-auto-update-options
+ * @link              http://www.chrispian.com
  * @since             1.0.0
  * @package           Auo_Plugin
  *
  */
 
 // Call register settings function.
-add_action( 'admin_init', 'register_auo_plugin_settings' );
-
+// add_action( 'admin_init', 'register_auo_plugin_settings' );
+add_action( 'admin_init', 'auo_save_plugin_settings' );
 
 // Create custom plugin settings menu.
 add_action( 'admin_menu', 'auo_plugin_create_menu' );
+
+
+// Finish up santize function
+function auo_sanitize( $input ) {
+	return ( empty( $input) ) ? false : $input;
+}
+
+
+/*
+* Since 1.0.1
+*/
+function auo_save_plugin_settings() {
+
+ 	// if ( isset( $_POST['auo_action'] ) && wp_verify_nonce( $_POST['auo_update_nonce'] ) ) {
+ 	if ( isset( $_POST['auo_action'] ) ) {
+
+		// Delete the option cache when we update
+		wp_cache_delete ( 'alloptions', 'options' );
+
+
+		// Refactor to loop through options array?
+
+		// auo_core_status
+		if ( get_option( 'auo_core_status' ) !== false && 'update_core' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_core_status', $_POST['auo_core_status'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_core_status', $_POST['auo_core_status'] );
+
+		}
+
+		// auo_core_option
+		if ( get_option( 'auo_core_option' ) !== false && 'update_core' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_core_option', $_POST['auo_core_option'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_core_option', $_POST['auo_core_option'] );
+
+		}
+
+		// auo_plugin_status
+		if ( get_option( 'auo_plugin_status' ) !== false && 'update_plugin' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_plugin_status', $_POST['auo_plugin_status'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_plugin_status', $_POST['auo_plugin_status'] );
+
+		}
+
+		// auo_plugin_option
+		if ( ( get_option( 'auo_plugin_option' ) !== false && 'update_plugin' === $_POST['auo_action'] ) || ( null === $_POST['auo_plugin_option'] && 'update_plugin' === $_POST['auo_action'] ) ) {
+			// We have one so update it
+			update_option( 'auo_plugin_option', $_POST['auo_plugin_option'] );
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_plugin_option', $_POST['auo_plugin_option'] );
+		}
+
+		// auo_theme_status
+		if ( get_option( 'auo_theme_status' ) !== false && 'update_plugin' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_theme_status', $_POST['auo_theme_status'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_theme_status', $_POST['auo_theme_status'] );
+
+		}
+
+		// auo_theme_option
+		if ( ( get_option( 'auo_theme_option' ) !== false && 'update_theme' === $_POST['auo_action'] ) || ( null === $_POST['auo_theme_option'] && 'update_theme' === $_POST['auo_action'] ) ) {
+			// We have one so update it
+			update_option( 'auo_theme_option', $_POST['auo_theme_option'] );
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_theme_option', $_POST['auo_theme_option'] );
+		}
+
+
+		// auo_translation_status
+		if ( get_option( 'auo_translation_status' ) !== false && 'update_translation' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_translation_status', $_POST['auo_translation_status'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_translation_status', $_POST['auo_translation_status'] );
+
+		}
+
+		// auo_translation_option
+		if ( ( get_option( 'auo_translation_option' ) !== false && 'update_translation' === $_POST['auo_action'] ) || ( null === $_POST['auo_translation_option'] && 'update_translation' === $_POST['auo_action'] ) ) {
+			// We have one so update it
+			update_option( 'auo_translation_option', $_POST['auo_translation_option'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_translation_option', $_POST['auo_translation_option'] );
+
+		}
+
+		// auo_translation_status
+		if ( get_option( 'auo_email_status' ) !== false && 'update_email' === $_POST['auo_action'] ) {
+			// We have one so update it
+			update_option( 'auo_email_status', $_POST['auo_email_status'] );
+
+		} else {
+			// Don't have it, lets add it
+			add_option( 'auo_email_status', $_POST['auo_email_status'] );
+
+		}
+
+		// echo "<p><strong>Settings Saved!</strong></p>";
+	}
+}
+
+
 
 /**
  * Add Sub Menu item to Settings Tab in WordPress Admin.
@@ -29,25 +152,26 @@ function auo_plugin_create_menu() {
 function register_auo_plugin_settings() {
 
 	// Register Core Settings.
-	register_setting( 'auo-plugin-settings', 'auo_core_status', 'string' );
-	register_setting( 'auo-plugin-settings', 'auo_core_option', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_core_status', 'auo_sanitize' );
+	register_setting( 'auo-plugin-settings', 'auo_core_option', 'aou_sanitize' );
 
 	// Register Plugin Settings.
-	register_setting( 'auo-plugin-settings', 'auo_plugin_status', 'string' );
-	register_setting( 'auo-plugin-settings', 'auo_plugin_option', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_plugin_status', 'auo_sanitize' );
+	register_setting( 'auo-plugin-settings', 'auo_plugin_option', 'auo_sanitize' );
 
 	// Register Theme Settings.
-	register_setting( 'auo-plugin-settings', 'auo_theme_status', 'string' );
-	register_setting( 'auo-plugin-settings', 'auo_theme_option', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_theme_status', 'auo_sanitize' );
+	register_setting( 'auo-plugin-settings', 'auo_theme_option', 'auo_sanitize' );
 
 	// Register Translation Settings.
-	register_setting( 'auo-plugin-settings', 'auo_translation_status', 'string' );
-	register_setting( 'auo-plugin-settings', 'auo_translation_option', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_translation_status', 'auo_sanitize' );
+	register_setting( 'auo-plugin-settings', 'auo_translation_option', 'auo_sanitize' );
 
 	// Register Email Settings.
-	register_setting( 'auo-plugin-settings', 'auo_email_status', 'string' );
+	register_setting( 'auo-plugin-settings', 'auo_email_status', 'auo_sanitize' );
 
 }
+
 
 /**
  * Render the settings page in WordPress admin
@@ -73,26 +197,19 @@ function auo_plugin_settings_page() {
 	<div class="wrap">
 		<div class="card">
 
-		<?php
+		<!-- <form method='post' action='options.php'> -->
+			<form method="post" action=''>
 
-		/*
-		* Not sure if this is needed. Will come back to this.
-		if ( 'FOUND' === $wp_config_status ) {
-			echo 'FTP Credentials Found!!';
-		} else {
-			echo 'FTP Credentials not present! - Turn this into a proper WordPress Notice and explain what to do.';
-		}
-		*/
+			<?php
+			$nonce = wp_create_nonce( 'auo_update_nonce');
+			?>
+			<input type='hidden' id='auo_update_nonce' name='auo_update_nonce' value='<?php echo $nonce; ?>' />
+			<?php //settings_fields( 'auo-plugin-settings' ); ?>
+			<?php // do_settings_sections( 'auo-plugin-settings' ); ?>
 
-		?>
-
-		<form method="post" action="options.php">
-		<?php settings_fields( 'auo-plugin-settings' ); ?>
-		<?php do_settings_sections( 'auo-plugin-settings' ); ?>
-
-		<?php
+			<?php
 			if ( 'info' === $active_tab ) {
-		?>
+			?>
 
 				<h3>Thanks for using WordPress Auto Update Settings</h3>
 
@@ -103,132 +220,148 @@ function auo_plugin_settings_page() {
 				<p>If you have suggestions or want to contribute to this plugin check out <a href=https://github.com/chrispian/wp-auto-update-options">our github repo</a> for this plugin. Pull requests welcome.</p>
 
 
-		<?php
+				<?php
 			}
-		?>
-
-		<?php
-			if ( 'core_settings' === $active_tab ) {
-		?>
-
-			<h3>Enable Automatic Updates for WordPress Core Files:</h3>
-
-			<?php
-			$auo_core_status              = esc_attr( get_option( 'auo_core_status' ) );
-			$auo_core_status_selected_yes = '';
-			$auo_core_status_selected_no  = '';
-
-			if ( 'Yes' === $auo_core_status ) {
-				$auo_core_status_selected_yes = 'selected';
-			}
-			if ( 'No' === $auo_core_status ) {
-				$auo_core_status_selected_no = 'selected';
-			}
-
 			?>
 
-			<select name="auo_core_status">
-				<option value="Yes" <?php echo $auo_core_status_selected_yes; ?> />
-				Yes</option>
-				<option value="No" <?php echo $auo_core_status_selected_no; ?> />
-				No</option>
-			</select>
-
-			<h3>WordPress Update Type:</h3>
 			<?php
-			$auo_core_option                = esc_attr( get_option( 'auo_core_option' ) );
-			$auo_core_option_selected_all   = '';
-			$auo_core_option_selected_major = '';
-			$auo_core_option_selected_minor = '';
+				if ( 'core_settings' === $active_tab ) {
+			?>
 
-			if ( 'All' === $auo_core_option ) {
-				$auo_core_option_selected_all = 'selected';
-			}
-			if ( 'Major' === $auo_core_option ) {
-				$auo_core_option_selected_major = 'selected';
-			}
-			if ( 'Minor' === $auo_core_option ) {
-				$auo_core_option_selected_minor = 'selected';
-			}
-
-				?>
+					<input type='hidden' name='auo_action' value='update_core' />
 
 
-			<div>
-				WordPress describes each update type as follows:
-				<ul>
-					<li><strong>Development Updates</strong> = Core development updates, known as the "bleeding edge".</li>
-					<li><strong>Major</strong> = Major core release updates</li>
-					<li><strong>Minor</strong> = Minor core updates, such as maintenance and security releases</li>
-				</ul>
-				<p>Auto Updates are safe and in most casues you should be using Minor or Major Updates. Use Development Updates only if you know and understand the risks - remember, this is bleeding edge code and may break your site.</p>
+					<h3>Enable Automatic Updates for WordPress Core Files:</h3>
 
-			</div>
+					<?php
+					$auo_core_status              = esc_attr( get_option( 'auo_core_status' ) );
+					$auo_core_status_selected_yes = '';
+					$auo_core_status_selected_no  = '';
 
-			<select name="auo_core_option">
-				<option value="ALL" <?php echo $auo_core_option_selected_all; ?> />ALL (Development, Major, and Major Updates)</option>
-				<option value="Major" <?php echo $auo_core_option_selected_major; ?> />Major Updates (Includes Minor Updates, NO Development Updates)</option>
-				<option value="Minor" <?php echo $auo_core_option_selected_minor; ?> />Minor Updates Only (No Development or Major Updates)</option>
-			</select>
+					if ( 'Yes' === $auo_core_status ) {
+						$auo_core_status_selected_yes = 'selected';
+					}
+					if ( 'No' === $auo_core_status ) {
+						$auo_core_status_selected_no = 'selected';
+					}
+
+					?>
+
+					<select name="auo_core_status">
+						<option value="Yes" <?php echo $auo_core_status_selected_yes; ?> />
+						Yes</option>
+						<option value="No" <?php echo $auo_core_status_selected_no; ?> />
+						No</option>
+					</select>
+
+					<h3>WordPress Update Type:</h3>
+					<?php
+					$auo_core_option                = esc_attr( get_option( 'auo_core_option' ) );
+					$auo_core_option_selected_all   = '';
+					$auo_core_option_selected_major = '';
+					$auo_core_option_selected_minor = '';
+
+					if ( 'All' === $auo_core_option ) {
+						$auo_core_option_selected_all = 'selected';
+					}
+					if ( 'Major' === $auo_core_option ) {
+						$auo_core_option_selected_major = 'selected';
+					}
+					if ( 'Minor' === $auo_core_option ) {
+						$auo_core_option_selected_minor = 'selected';
+					}
+
+					?>
 
 
-			<?php
+					<div>
+						WordPress describes each update type as follows:
+						<ul>
+							<li><strong>Development Updates</strong> = Core development updates, known as
+								the "bleeding edge".</li>
+							<li>
+							<li><strong>Major</strong> = Major core release updates</li>
+							<li><strong>Minor</strong> = Minor core updates, such as maintenance and
+								security releases</li>
+						</ul>
+						<p>Auto Updates are safe and in most casues you should be using Minor or Major Updates.
+						Use Development Updates only if you know and understand the risks - remember, this
+							is bleeding edge code and may break your site.</p>
+
+					</div>
+
+					<select name="auo_core_option">
+						<option value="ALL" <?php echo $auo_core_option_selected_all; ?> />
+						ALL (Development, Major, and Major Updates)</option>
+						<option value="Major" <?php echo $auo_core_option_selected_major; ?> />
+						Major Updates (Includes Minor Updates, NO Development Updates)</option>
+						<option value="Minor" <?php echo $auo_core_option_selected_minor; ?> />
+						Minor Updates Only (No Development or Major Updates)</option>
+						</select>
+
+
+					<?php
 				}
 			?>
+
 
 			<?php
 				if ( 'plugin_settings' === $active_tab ) {
 			?>
 
-				<h3>Enable Automatic Updates for Plugins:</h3>
 
-				<?php
+					<input type='hidden' name='auo_action' value='update_plugin' />
 
-				$auo_plugin_status              = esc_attr( get_option( 'auo_plugin_status' ) );
-				$auo_plugin_status_selected_yes = '';
-				$auo_plugin_status_selected_no  = '';
 
-				if ( 'Yes' === $auo_plugin_status ) {
-					$auo_plugin_status_selected_yes = 'selected';
-				}
-				if ( 'No' === $auo_plugin_status ) {
-					$auo_plugin_status_selected_no = 'selected';
-				}
+					<h3>Enable Automatic Updates for Plugins:</h3>
 
-				?>
-				<select name="auo_plugin_status">
-					<option value="Yes" <?php echo $auo_plugin_status_selected_yes; ?> />
-					Yes</option>
-					<option value="No" <?php echo $auo_plugin_status_selected_no; ?> />
-					No</option>
-				</select>
+					<?php
+					$auo_plugin_status              = esc_attr( get_option( 'auo_plugin_status' ) );
+					$auo_plugin_status_selected_yes = '';
+					$auo_plugin_status_selected_no  = '';
 
-				<h3>Exclude Plugins:</h3>
-				<?php
-				$installed_plugins = get_plugins();
-				$excluded_plugins  = get_option( 'auo_plugin_option' );
-
-				foreach ( $installed_plugins as $key => $plugin ) {
-					if ( $excluded_plugins ) {
-						if ( in_array( $plugin['TextDomain'], $excluded_plugins, true ) ) {
-							$checkbox_checked = 'checked';
-						} else {
-							$checkbox_checked = '';
-						}
+					if ( 'Yes' === $auo_plugin_status ) {
+						$auo_plugin_status_selected_yes = 'selected';
 					}
-					echo '<input type="checkbox" name="auo_plugin_option[]" value="' . esc_attr( $plugin['TextDomain'] ) . '"' . esc_attr( $checkbox_checked ) . ' />' . esc_attr( $plugin['Name'] ) . "<br />\n";
-				}
+					if ( 'No' === $auo_plugin_status ) {
+						$auo_plugin_status_selected_no = 'selected';
+					}
 
-				?>
+					?>
+					<select name="auo_plugin_status">
+						<option value="Yes" <?php echo $auo_plugin_status_selected_yes; ?> />
+						Yes</option>
+						<option value="No" <?php echo $auo_plugin_status_selected_no; ?> />
+						No</option>
+					</select>
+
+					<h3>Exclude Plugins:</h3>
+					<?php
+					$installed_plugins = get_plugins();
+					$excluded_plugins  = get_option( 'auo_plugin_option' );
+					$checkbox_checked = '';
+
+					foreach ( $installed_plugins as $key => $plugin ) {
+						if ( $excluded_plugins ) {
+							if ( in_array( $plugin['TextDomain'], $excluded_plugins, true ) ) {
+								$checkbox_checked = 'checked';
+							} else {
+								$checkbox_checked = '';
+							}
+						}
+						echo '<input type="checkbox" name="auo_plugin_option[]" value="' . esc_attr( $plugin['TextDomain'] ) . '"' . esc_attr( $checkbox_checked ) . ' />' . esc_attr( $plugin['Name'] ) . "<br />\n";
+					}
+
+										?>
 
 
 			<?php
 				}
-			?>
 
-			<?php
 			if ( 'theme_settings' === $active_tab ) {
 			?>
+
+				<input type='hidden' name='auo_action' value='update_theme' />
 
 				<h3>Enable Automatic Updates for Themes:</h3>
 
@@ -284,6 +417,9 @@ function auo_plugin_settings_page() {
 			if ( 'translation_settings' === $active_tab ) {
 			?>
 
+
+				<input type='hidden' name='auo_action' value='update_translation' />
+
 				<h3>Enable Automatic Updates for Translations:</h3>
 
 				<?php
@@ -330,13 +466,12 @@ function auo_plugin_settings_page() {
 							?>
 
 
-			<?php
-				}
-			?>
+				<?php
+			}
+					if ( 'email_settings' === $active_tab ) {
+				?>
 
-			<?php
-				if ( 'email_settings' === $active_tab ) {
-			?>
+				<input type='hidden' name='auo_action' value='update_email' />
 
 				<h3>Send Emails For Updates:</h3>
 
@@ -362,8 +497,8 @@ function auo_plugin_settings_page() {
 				</select>
 
 
-			<?php
-				}
+				<?php
+			}
 			?>
 
 
@@ -372,6 +507,8 @@ function auo_plugin_settings_page() {
 					submit_button();
 				}
 			?>
+
+
 
 		</form>
 		</div>
