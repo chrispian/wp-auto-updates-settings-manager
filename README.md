@@ -4,7 +4,7 @@ Simple plugin to manage Auto Update Settings for WordPress Core, Plugins, Themes
 
 ###
 
-*NOTE* This is the initial release and has not been throughougly tested. Do not run on a production site util testing is completed. If you want to help test this, download and install on an non-critical sites. 
+*NOTE* This is still an early release and has not been throughougly tested. I've been running it on several of my sites now for a while with no issues but please use with caution. Testers very much appreciated.
 
 ### Installing
 
