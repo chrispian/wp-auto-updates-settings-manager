@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.1] - 2019-01-19
 - Fixed various bugs that were preventing updates from running
 - Refactored to address bug preventing saving options erased the options for all other tabs
+
+## [2.0.0] - 2019-02-01
+- Refactored to OOP with Composer PSR-4 style autoloding

@@ -24,8 +24,8 @@ Upload to plugins folder and activate plugin. You can then confgure under the "S
 - Add nonce to tabs
 - Make sure this plugin meets all WP standards, including for translations, etc.
 - Make sure this works with Multi-Site, BuddyPress, WooCommerce, etc.
-- Update for compatibility with Gutenberg
 - Check for proper permissions/settings that will allow Auto Updates to run. 
+- Improve on OOP implementation, more separation of code/html, don't uses singleton instance, etc.
 
 ### Authors
 

@@ -1,0 +1,7 @@
+{
+  "autoload": {
+    "psr-4": {
+      "CHB_Auto_Update_Settings_Manager\\":"src/"
+    }
+  }
+}
