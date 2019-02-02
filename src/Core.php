@@ -45,6 +45,8 @@ class Core {
 				return true; // Otherwise, update it!
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -63,6 +65,8 @@ class Core {
 				return true; // Otherwise, update it!
 			}
 		}
+
+		return true;
 	}
 
 	/**
@@ -81,6 +85,8 @@ class Core {
 				return true; // Otherwise, update it!
 			}
 		}
+
+		return true;
 	}
 
 }

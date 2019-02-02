@@ -13,3 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2019-02-01
 - Refactored to OOP with Composer PSR-4 style autoloding
+
+## [2.0.1] - 2019-02-01
+- Removed commented out code that's no longer necessary
+- Somehow removed a section of code when launching this, added that back.
+
+## [2.0.2] - 2019-02-01
+- Put a hackey fix in for calling the Core class until I figure out the right way
+- Fixed the logic in the update check where it wasn't setting a status if there were no excluded items (returns true by default now)

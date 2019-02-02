@@ -54,7 +54,7 @@ class CHB_Auto_Update_Settings_Manager {
 	 * @var  string
 	 * @since  2.0.0
 	 */
-	const VERSION = '2.0.1';
+	const VERSION = '2.0.2';
 
 	/**
 	 * URL of plugin directory
@@ -140,7 +140,7 @@ class CHB_Auto_Update_Settings_Manager {
 	 * @since 2.0.0
 	 * @return  null
 	 */
-	function plugin_classes() {
+	public function plugin_classes() {
 		$this->options = new Options( $this ) ;
 		$this->helpers = new Helpers( $this );
 		$this->core    = new Core( $this );
@@ -313,6 +313,8 @@ chb_auto_update_settings_manager();
 
 // Do the things
 
+$Core = new Core( $CHB_Auto_Update_Settings_Manager );
+
 // Grab some vars we'll need to decide what to do.
 $ausm_update_plugin_status = get_option( 'ausm_plugin_status' );
 $aou_update_theme_status   = get_option( 'ausm_theme_status' );
@@ -324,12 +326,12 @@ $ausm_email_status         = get_option( 'ausm_email_status' );
 
 // Update Plugins?
 if ( 'Yes' === $ausm_update_plugin_status ) {
-	add_filter( 'auto_update_plugin', 'ausm_update_plugins', 10, 2 ); // Auto Updates plugins, excluding those in the array.
+	add_filter( 'auto_update_plugin', [ $Core, 'update_plugins' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
 }
 
 // Update Themes?
 if ( 'Yes' === $aou_update_theme_status ) {
-	add_filter( 'auto_update_theme', 'ausm_update_themes', 10, 2 ); // Auto Updates plugins, excluding those in the array.
+	add_filter( 'auto_update_theme', [ $Core, 'update_themes' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
 }
 
 // Update Core?
@@ -348,7 +350,7 @@ if ( 'Yes' === $ausm_update_core_status ) {
 
 // Update Translations?
 if ( 'Yes' === $ausm_translation_status ) {
-	add_filter( 'auto_update_translation', 'ausm_update_translations', 10, 2 ); // Auto Updates translations, excluding those in the array.
+	add_filter( 'auto_update_translation', [ $Core, 'update_translations' ], 10, 2 ); // Auto Updates translations, excluding those in the array.
 }
 
 // Send Emails about updates?
