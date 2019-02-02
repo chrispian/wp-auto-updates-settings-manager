@@ -29,9 +29,6 @@ namespace CHB_Auto_Update_Settings_Manager;
 
 require_once ( dirname(__FILE__) . '/vendor/autoload.php' );
 
-// $vendorDir = dirname(dirname(__FILE__));
-// $baseDir = dirname($vendorDir);
-
 // If this file is called directly, abort.
 defined( 'ABSPATH' ) || die( 'Direct Access Not Permitted.' );
 
@@ -57,7 +54,7 @@ class CHB_Auto_Update_Settings_Manager {
 	 * @var  string
 	 * @since  2.0.0
 	 */
-	const VERSION = '2.0.0';
+	const VERSION = '2.0.1';
 
 	/**
 	 * URL of plugin directory
@@ -313,3 +310,49 @@ function chb_auto_update_settings_manager() {
 
 // Kick it off
 chb_auto_update_settings_manager();
+
+// Do the things
+
+// Grab some vars we'll need to decide what to do.
+$ausm_update_plugin_status = get_option( 'ausm_plugin_status' );
+$aou_update_theme_status   = get_option( 'ausm_theme_status' );
+$ausm_update_core_status   = get_option( 'ausm_core_status' );
+$ausm_update_core_option   = get_option( 'ausm_core_option' );
+$ausm_translation_status   = get_option( 'ausm_translation_status' );
+$ausm_translation_option   = get_option( 'ausm_translation_option' );
+$ausm_email_status         = get_option( 'ausm_email_status' );
+
+// Update Plugins?
+if ( 'Yes' === $ausm_update_plugin_status ) {
+	add_filter( 'auto_update_plugin', 'ausm_update_plugins', 10, 2 ); // Auto Updates plugins, excluding those in the array.
+}
+
+// Update Themes?
+if ( 'Yes' === $aou_update_theme_status ) {
+	add_filter( 'auto_update_theme', 'ausm_update_themes', 10, 2 ); // Auto Updates plugins, excluding those in the array.
+}
+
+// Update Core?
+if ( 'Yes' === $ausm_update_core_status ) {
+	if ( 'ALL' === $ausm_update_core_option ) {
+		add_filter( 'allow_dev_auto_core_updates', '__return_true' ); // Enable development, major & minor updates.
+	}
+	if ( 'Major' === $ausm_update_core_option || 'ALL' === $ausm_update_core_option ) {
+		add_filter( 'allow_major_auto_core_updates', '__return_true' ); // Enable major & minor updates.
+	}
+	if ( 'Minor' === $ausm_update_core_option || 'ALL' === $ausm_update_core_option ) {
+		add_filter( 'allow_minor_auto_core_updates', '__return_true' ); // Enable minor updates.
+	}
+}
+
+
+// Update Translations?
+if ( 'Yes' === $ausm_translation_status ) {
+	add_filter( 'auto_update_translation', 'ausm_update_translations', 10, 2 ); // Auto Updates translations, excluding those in the array.
+}
+
+// Send Emails about updates?
+if ( 'Yes' === $ausm_email_status ) {
+	add_filter( 'auto_core_update_send_email', '__return_true' );
+}
+
