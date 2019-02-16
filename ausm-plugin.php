@@ -11,7 +11,7 @@
  * Plugin Name:       Auto Update Settings Manager
  * Plugin URI:        http://www.chrispian.com
  * Description:       Adds options for Auto Updating WordPress Core, Plugins, Themes & Translations.
- * Version:           2.0.0
+ * Version:           2.0.3
  * Author:            Chrispian H. Burks
  * Author URI:        http://www.chrispian.com
  * License:           GPL-2.0+
@@ -32,11 +32,6 @@ require_once ( dirname(__FILE__) . '/vendor/autoload.php' );
 // If this file is called directly, abort.
 defined( 'ABSPATH' ) || die( 'Direct Access Not Permitted.' );
 
-use CHB_Auto_Update_Settings_Manager\Core;
-use CHB_Auto_Update_Settings_Manager\Helpers;
-use CHB_Auto_Update_Settings_Manager\Options;
-
-
 /**
  * Main initiation class
  *
@@ -54,7 +49,7 @@ class CHB_Auto_Update_Settings_Manager {
 	 * @var  string
 	 * @since  2.0.0
 	 */
-	const VERSION = '2.0.2';
+	const VERSION = '2.0.3';
 
 	/**
 	 * URL of plugin directory
@@ -182,7 +177,9 @@ class CHB_Auto_Update_Settings_Manager {
 	 * @since  2.0.0
 	 * @return null
 	 */
-	public function init() {}
+	public function init() {
+
+	}
 
 	/**
 	 * Check that all plugin requirements are met
@@ -313,8 +310,6 @@ chb_auto_update_settings_manager();
 
 // Do the things
 
-$Core = new Core( $CHB_Auto_Update_Settings_Manager );
-
 // Grab some vars we'll need to decide what to do.
 $ausm_update_plugin_status = get_option( 'ausm_plugin_status' );
 $aou_update_theme_status   = get_option( 'ausm_theme_status' );
@@ -326,12 +321,12 @@ $ausm_email_status         = get_option( 'ausm_email_status' );
 
 // Update Plugins?
 if ( 'Yes' === $ausm_update_plugin_status ) {
-	add_filter( 'auto_update_plugin', [ $Core, 'update_plugins' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
+	add_filter( 'auto_update_plugin', [ chb_auto_update_settings_manager()->core, 'update_plugins' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
 }
 
 // Update Themes?
 if ( 'Yes' === $aou_update_theme_status ) {
-	add_filter( 'auto_update_theme', [ $Core, 'update_themes' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
+	add_filter( 'auto_update_theme', [ chb_auto_update_settings_manager()->core, 'update_themes' ], 10, 2 ); // Auto Updates plugins, excluding those in the array.
 }
 
 // Update Core?
@@ -350,7 +345,7 @@ if ( 'Yes' === $ausm_update_core_status ) {
 
 // Update Translations?
 if ( 'Yes' === $ausm_translation_status ) {
-	add_filter( 'auto_update_translation', [ $Core, 'update_translations' ], 10, 2 ); // Auto Updates translations, excluding those in the array.
+	add_filter( 'auto_update_translation', [ chb_auto_update_settings_manager()->core, 'update_translations' ], 10, 2 ); // Auto Updates translations, excluding those in the array.
 }
 
 // Send Emails about updates?
