@@ -21,3 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [2.0.2] - 2019-02-01
 - Put a hackey fix in for calling the Core class until I figure out the right way
 - Fixed the logic in the update check where it wasn't setting a status if there were no excluded items (returns true by default now)
+
+## [2.0.3] - 2019-02-015
+- Fixed the hacky way I was calling the Core class
+- Removed unnecssary 'USE' at the top since it's autoloading
